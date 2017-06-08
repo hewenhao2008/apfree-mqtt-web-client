@@ -25,7 +25,7 @@ limitations under the License.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>MQTT Websocket Client</title>
+    <title>ApFree WiFiDog MQTT Client</title>
 
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
@@ -37,8 +37,8 @@ limitations under the License.
 
 <div id="header">
     <div>
-        <a href="http://www.hivemq.com"><img id="headerlogo" src="assets/logo.png"></a>
-        <span id="headertitle">Websockets Client Showcase</span>
+        <a href="http://rom.kunteng.org"><img id="headerlogo" src="assets/logo.png"></a>
+        <span id="headertitle">ApFree WiFiDog MQTT Client </span>
     </div>
 </div>
 <div id="content" class="row">
@@ -161,7 +161,7 @@ limitations under the License.
                         <div class="row">
                             <div class="large-6 columns">
                                 <label>GateWayId</label>
-                                <input id="publishTopic" type="textarea" value="">
+                                <input id="publishTopic" type="text" value="">
                             </div>
                             <div class="large-2 columns">
                                 <label for="publishQoSInput">QoS</label>
@@ -336,9 +336,12 @@ limitations under the License.
 
 	function pubMsg() {
 		var topic = 'wifidog/' + $('#publishTopic').val() + '/request/100';
-		var op = $('#publishPayload').val();
-		if (op == '')
-		websocketclient.publish(topic, $('#publishPayload').val(), parseInt($('#publishQoSInput').val(),10),$('#publishRetain').is(':checked'));
+		var op = $('#apfreeOperation').val();
+		var payload = '';
+		if (op == 'Status') {
+			payload = '{\"op\":\"get_status\"}';
+		} 
+		websocketclient.publish(topic, payload, parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
 	}
 
     $(document).foundation();
