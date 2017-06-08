@@ -306,8 +306,7 @@ var websocketclient = {
             html += '           </div>' +
                 '           <div class="large-12 columns message break-words">' + status + '</div>' +
                 '       </div>' +
-                '   </div>' +
-                '</li>';
+                '   </div>';
             
             html += '           </div>' +
                 '           <div class="large-12 columns message break-words">' + clients + '</div>' +
