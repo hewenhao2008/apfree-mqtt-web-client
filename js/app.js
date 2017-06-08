@@ -256,9 +256,15 @@ var websocketclient = {
             var n = payload.indexOf('msg:');
             var msg = '';
             if (n > 0) {
-                msg = payload.substr(n+5, payload.length-2);
+                msg = payload.substring(n+5, payload.length-2);
             } else
                 msg = payload;
+            
+            jmsg = JSON.parse(msg);
+            var status =  '<table>' +
+                '<tr><td>sys_uptime</td><td>' + jmsg.sys_uptime +'</td>' +
+                '</tr>' +
+                '</table>';
             
             var html = '<li class="messLine id="' + largest + '">' +
                 '   <div class="row large-12 mess' + largest + '" style="border-left: solid 10px #' + message.color + '; ">' +
@@ -271,7 +277,7 @@ var websocketclient = {
                 html += 'Retained';
             }
             html += '           </div>' +
-                '           <div class="large-12 columns message break-words">' + Encoder.htmlEncode(msg) + '</div>' +
+                '           <div class="large-12 columns message break-words">' + status + '</div>' +
                 '       </div>' +
                 '   </div>' +
                 '</li>';
