@@ -160,8 +160,8 @@ limitations under the License.
                     <form class="custom">
                         <div class="row">
                             <div class="large-6 columns">
-                                <label>Topic</label>
-                                <input id="publishTopic" type="text" value="testtopic/1">
+                                <label>GateWayId</label>
+                                <input id="publishTopic" type="textarea" value="">
                             </div>
                             <div class="large-2 columns">
                                 <label for="publishQoSInput">QoS</label>
@@ -177,13 +177,33 @@ limitations under the License.
                             </div>
                             <div class="large-2 columns">
                                 <a class="small button" id="publishButton"
-                                   onclick="websocketclient.publish($('#publishTopic').val(),$('#publishPayload').val(),parseInt($('#publishQoSInput').val(),10),$('#publishRetain').is(':checked'))">Publish</a>
+                                   onclick="pubMsg()">Publish</a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
-                                <label>Message</label>
-                                <textarea id="publishPayload"></textarea>
+                                <label>ApFree WiFiDog Command</label>
+								<select id="apfreeOperation" class="small">
+										<option>Status</option>
+										<option>Set trusted domain</option>
+										<option>Set trusted pdomain</option>
+										<option>Set trusted mac</option>
+										<option>Set trusted ip</option>
+										<option>Get trusted domain</option>
+										<option>Get trusted pdomain</option>
+										<option>Get trusted mac</option>
+										<option>Get trusted ip</option>
+										<option>Show trusted domain</option>
+										<option>Show trusted pdomain</option>
+										<option>Show trusted mac</option>
+										<option>Show trusted ip</option>
+										<option>Logout mac client</option>
+										<option>Logout ip client</option>
+										<option>Set auth server</option>
+										<option>Save rule</option>
+										<option>Reboot</option>
+								</select>
+                                <textarea id="apfreeValue"></textarea>
                             </div>
                         </div>
                     </form>
@@ -272,7 +292,7 @@ limitations under the License.
                                 <div class="row large-12 columns">
                                     <div class="large-12 columns">
                                         <label>Topic</label>
-                                        <input id="subscribeTopic" type="text" value="testtopic/#">
+                                        <input id="subscribeTopic" type="text" value="wifidog/+/response/+">
                                     </div>
                                 </div>
                             </form>
@@ -313,6 +333,13 @@ limitations under the License.
             text += possible.charAt(Math.floor(Math.random() * possible.length));
         return text;
     }
+
+	function pubMsg() {
+		var topic = 'wifidog/' + $('#publishTopic').val() + '/request/100';
+		var op = $('#publishPayload').val();
+		if (op == '')
+		websocketclient.publish(topic, $('#publishPayload').val(), parseInt($('#publishQoSInput').val(),10),$('#publishRetain').is(':checked'));
+	}
 
     $(document).foundation();
     $(document).ready(function () {
