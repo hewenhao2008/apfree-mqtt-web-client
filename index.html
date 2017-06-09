@@ -189,7 +189,7 @@ limitations under the License.
                         <div class="row">
                             <div class="large-12 columns">
                                 <label>GateWayId</label>
-                                <textarea id="publishTopic" rows="10" cols="32">
+                                <textarea id="publishTopic">
                                 </textarea>
                             </div>
                         </div>
@@ -320,10 +320,9 @@ limitations under the License.
             text += possible.charAt(Math.floor(Math.random() * possible.length));
         return text;
     }
-
-	function pubMsg() {
-		var topic = 'wifidog/' + $('#publishTopic').val() + '/request/' + Math.floor(Math.random() * 100);
-		var op = $('#apfreeOperation').val();
+	
+	function sendPublish(gwid, op, qos, retain) {
+		var topic = 'wifidog/' + gwid + '/request/' + Math.floor(Math.random() * 100);
 		var payload = {};
 		if (op == 'Status') {
 			payload['op'] = 'get_status';
@@ -340,7 +339,16 @@ limitations under the License.
 			payload['op'] = 'show_trusted';
 			payload['type'] = 'ip';
 		}
-		websocketclient.publish(topic, JSON.stringify(payload), parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
+		websocketclient.publish(topic, JSON.stringify(payload), qos, retain);
+	}
+	
+	function pubMsg() {
+		var gatewayid = $('#publishTopic').val();
+		var gwidList = gatewayid.split(',');
+		var op = $('#apfreeOperation').val();
+		for(var i in gwidList) {
+			sendPublish.publish(gwidList[i], op, parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
+		}
 	}
 
     $(document).foundation();
