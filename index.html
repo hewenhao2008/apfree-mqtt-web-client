@@ -343,7 +343,7 @@ limitations under the License.
 	}
 	
 	function pubMsg() {
-		var gwidList = $('#publishTopic').val().replace(/\r\n/g, "\n").split("\n");;
+		var gwidList = $('#publishTopic').val().trim().replace(/\r\n/g, "\n").split("\n");;
 		var op = $('#apfreeOperation').val();
     if (typeof gwidList.map != "undefined") {
       sendPublish(gwidList, op, parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
