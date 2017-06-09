@@ -261,26 +261,28 @@ var websocketclient = {
                 msg = payload;
             
             jmsg = JSON.parse(msg);
-            var status =  '<table>' +
-                '<tr><td>sys_uptime</td><td>' + jmsg.sys_uptime +'</td></tr>' +
-                '<tr><td>sys_memfree</td><td>' + jmsg.sys_memfree +'</td></tr>' +
-                '<tr><td>nf_conntrack_count</td><td>' + jmsg.nf_conntrack_count +'</td></tr>' +
-                '<tr><td>cpu_usage</td><td>' + jmsg.cpu_usage +'</td></tr>' +
-                '<tr><td>sys_load</td><td>' + jmsg.sys_load +'</td></tr>' +
-                '<tr><td>boad_type</td><td>' + jmsg.boad_type +'</td></tr>' +
-                '<tr><td>boad_name</td><td>' + jmsg.boad_name +'</td></tr>' +
-                '<tr><td>wifidog_version</td><td>' + jmsg.wifidog_version +'</td></tr>' +
-                '<tr><td>wifidog_uptime</td><td>' + jmsg.wifidog_uptime +'</td></tr>' +
-                '<tr><td>auth_server</td><td>' + jmsg.auth_server +'</td></tr>' +
-                '<tr><td>online_client_count</td><td>' + jmsg.online_client_count +'</td></tr>' +
-                '<tr><td>active_client_count</td><td>' + jmsg.active_client_count +'</td></tr>' +
-                '</table>';
+            var status =  '<table><tr><td>sys_uptime</td><td>sys_memfree</td><td>nf_conntrack_count</td><td>cpu_usage</td>' +
+                '<td>sys_load</td><td>boad_type</td><td>boad_name</td><td>wifidog_version</td><td>wifidog_uptime</td>' + 
+                '<td>auth_server</td><td>online_client_count</td><td>active_client_count</td></tr><tr>' +
+                '<td>' + jmsg.sys_uptime +'</td>' +
+                '<td>' + jmsg.sys_memfree +'</td>' +
+                '<td>' + jmsg.nf_conntrack_count +'</td>' +
+                '<td>' + jmsg.cpu_usage +'</td>' +
+                '<td>' + jmsg.sys_load +'</td>' +
+                '<td>' + jmsg.boad_type +'</td>' +
+                '<td>' + jmsg.boad_name +'</td>' +
+                '<td>' + jmsg.wifidog_version +'</td>' +
+                '<td>' + jmsg.wifidog_uptime +'</td>' +
+                '<td>' + jmsg.auth_server +'</td>' +
+                '<td>' + jmsg.online_client_count +'</td>' +
+                '<td>' + jmsg.active_client_count +'</td></tr></table>'; 
             
             var cl = jmsg.clients;
-            var clients = '<table><tr><td>status</td><td>ip</td><td>mac</td><td>name</td><td>first_login</td><td>downloaded</td><td>uploaded</td></tr>'; 
+            var clients = '<table><tr><td>No</td><td>status</td><td>ip</td><td>mac</td><td>name</td><td>first_login</td><td>downloaded</td><td>uploaded</td></tr>'; 
             
             for(var i in cl) {
                 clients += '<tr>';
+                clients += '<td>' + i + '</td>';
                 clients += '<td>' + cl[i].status + '</td>';
                 clients += '<td>' + cl[i].ip + '</td>';
                 clients += '<td>' + cl[i].mac + '</td>';
