@@ -322,23 +322,28 @@ limitations under the License.
     }
 
 	function pubMsg() {
-		var topic = 'wifidog/' + $('#publishTopic').val() + '/request/100';
+		var topic = 'wifidog/' + $('#publishTopic').val() + '/request/';
 		var op = $('#apfreeOperation').val();
 		var payload = {};
 		if (op == 'Status') {
 			payload['op'] = 'get_status';
+			topic += 'get_status';
 		} else if (op == 'Show trusted domain') {
 			payload['op'] = 'show_trusted';
 			payload['type'] = 'domain';
+			topic += 'show_trusted_domain';
 		} else if (op == 'Show trusted pdomain') {
 			payload['op'] = 'show_trusted';
 			payload['type'] = 'pdomains';
+			topic += 'show_trusted_pdomain';
 		} else if (op == 'Show trusted mac') {
 			payload['op'] = 'show_trusted';
 			payload['type'] = 'mac';
+			topic += 'show_trusted_mac';
 		} else if (op == 'Show trusted ip') {
 			payload['op'] = 'show_trusted';
 			payload['type'] = 'ip';
+			topic += 'show_trusted_ip'
 		}
 		websocketclient.publish(topic, JSON.stringify(payload), parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
 	}
