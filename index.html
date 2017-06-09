@@ -189,8 +189,7 @@ limitations under the License.
                         <div class="row">
                             <div class="large-6 columns">
                                 <label>GateWayId</label>
-                                <textarea id="publishTopic">
-                                </textarea>
+                                <textarea id="publishTopic" cols="32"></textarea>        
                             </div>
                         </div>
                     </form>
@@ -345,7 +344,7 @@ limitations under the License.
 	function pubMsg() {
 		var gwidList = $('#publishTopic').val().trim().replace(/\r\n/g, "\n").split("\n");;
 		var op = $('#apfreeOperation').val();
-    if (typeof gwidList.map != "undefined") {
+    if (typeof gwidList.map == "undefined") {
       sendPublish(gwidList, op, parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
     } else {
       for(var i in gwidList) {
