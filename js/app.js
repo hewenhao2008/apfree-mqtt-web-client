@@ -260,7 +260,41 @@ var websocketclient = {
             } else
                 msg = payload;
             
-            jmsg = JSON.parse(msg);
+            var html = '<li class="messLine id="' + largest + '">' +
+                '   <div class="row large-12 mess' + largest + '" style="border-left: solid 10px #' + message.color + '; ">' +
+                '       <div class="large-12 columns messageText">' +
+                '           <div class="large-3 columns date">' + message.timestamp.format("YYYY-MM-DD HH:mm:ss") + '</div>' +
+                '           <div class="large-5 columns topicM truncate" id="topicM' + largest + '" title="' + Encoder.htmlEncode(message.topic, 0) + '">Topic: ' + Encoder.htmlEncode(message.topic) + '</div>' +
+                '           <div class="large-2 columns qos">Qos: ' + message.qos + '</div>' +
+                '           <div class="large-2 columns retain">';
+            if (message.retained) {
+                html += 'Retained';
+            }
+            var jmsg = '';
+            try {
+                jmsg = JSON.parse(msg);
+            }catch(e) {
+                 html += '           </div>' +
+                    '           <div class="large-12 columns message break-words">' + Encoder.htmlEncode(msg) + '</div>' +
+                    '       </div>' +
+                    '   </div>' +
+                    '</li>';
+
+                $("#messEdit").prepend(html);
+                return largest;
+            }
+            
+            if (!jmsg.hasOwnProperty('sys_uptime')) {
+                html += '           </div>' +
+                    '           <div class="large-12 columns message break-words">' + Encoder.htmlEncode(msg) + '</div>' +
+                    '       </div>' +
+                    '   </div>' +
+                    '</li>';
+
+                $("#messEdit").prepend(html);
+                return largest;
+            }
+            
             var status =  '<table><tr><td>sys_uptime</td><td>sys_memfree</td><td>nf_conntrack_count</td><td>cpu_usage</td>' +
                 '<td>sys_load</td><td>boad_type</td><td>boad_name</td><td>wifidog_version</td><td>wifidog_uptime</td>' + 
                 '<td>auth_server</td><td>online_client_count</td><td>active_client_count</td></tr><tr>' +
@@ -295,16 +329,7 @@ var websocketclient = {
             
             clients += '</table>';
             
-            var html = '<li class="messLine id="' + largest + '">' +
-                '   <div class="row large-12 mess' + largest + '" style="border-left: solid 10px #' + message.color + '; ">' +
-                '       <div class="large-12 columns messageText">' +
-                '           <div class="large-3 columns date">' + message.timestamp.format("YYYY-MM-DD HH:mm:ss") + '</div>' +
-                '           <div class="large-5 columns topicM truncate" id="topicM' + largest + '" title="' + Encoder.htmlEncode(message.topic, 0) + '">Topic: ' + Encoder.htmlEncode(message.topic) + '</div>' +
-                '           <div class="large-2 columns qos">Qos: ' + message.qos + '</div>' +
-                '           <div class="large-2 columns retain">';
-            if (message.retained) {
-                html += 'Retained';
-            }
+            
             html += '           </div>' +
                 '           <div class="large-12 columns message break-words">' + status + '</div>' +
                 '           <div class="large-12 columns message break-words">' + clients + '</div>' +
