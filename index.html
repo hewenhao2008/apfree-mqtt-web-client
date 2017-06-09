@@ -343,12 +343,15 @@ limitations under the License.
 	}
 	
 	function pubMsg() {
-		var gatewayid = $('#publishTopic').val();
-		var gwidList = gatewayid.split(',');
+		var gwidList = $('#publishTopic').val().replace(/\r\n/g, "\n").split("\n");;
 		var op = $('#apfreeOperation').val();
-		for(var i in gwidList) {
-			sendPublish.publish(gwidList[i], op, parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
-		}
+    if (typeof gwidList.map != "undefined") {
+      sendPublish.publish(gwidList, op, parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
+    } else {
+      for(var i in gwidList) {
+        sendPublish.publish(gwidList[i], op, parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
+      }
+    }
 	}
 
     $(document).foundation();
