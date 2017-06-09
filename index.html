@@ -158,10 +158,16 @@ limitations under the License.
             <div class="row panel" id="publishPanel">
                 <div class="large-12 columns">
                     <form class="custom">
-                        <div class="row">
-                            <div class="large-6 columns">
-                                <label>GateWayId</label>
-                                <input id="publishTopic" type="text" value="">
+                        <div class="row">                        
+                            <div class="large-12 columns">
+                                <label>ApFree WiFiDog Command</label>
+                                  <select id="apfreeOperation" class="small">
+                                      <option>Status</option>
+                                      <option>Show trusted domain</option>
+                                      <option>Show trusted pdomain</option>
+                                      <option>Show trusted mac</option>
+                                      <option>Show trusted ip</option>
+                                  </select>
                             </div>
                             <div class="large-2 columns">
                                 <label for="publishQoSInput">QoS</label>
@@ -181,16 +187,9 @@ limitations under the License.
                             </div>
                         </div>
                         <div class="row">
-                            <div class="large-12 columns">
-                                <label>ApFree WiFiDog Command</label>
-								<select id="apfreeOperation" class="small">
-										<option>Status</option>
-										<option>Show trusted domain</option>
-										<option>Show trusted pdomain</option>
-										<option>Show trusted mac</option>
-										<option>Show trusted ip</option>
-								</select>
-                                <textarea id="apfreeValue"></textarea>
+                            <div class="large-6 columns">
+                                <label>GateWayId</label>
+                                <input id="publishTopic" type="textarea" value="">
                             </div>
                         </div>
                     </form>
