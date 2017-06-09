@@ -307,14 +307,11 @@ var websocketclient = {
             }
             html += '           </div>' +
                 '           <div class="large-12 columns message break-words">' + status + '</div>' +
-                '       </div>' +
-                '   </div>';
-            
-            html += '           </div>' +
                 '           <div class="large-12 columns message break-words">' + clients + '</div>' +
                 '       </div>' +
                 '   </div>' +
                 '</li>';
+            
             $("#messEdit").prepend(html);
             return largest;
         },
