@@ -185,7 +185,7 @@ var websocketclient = {
     'deleteSubscription': function (id) {
         var elem = $("#sub" + id);
 
-        if (confirm('Wirklich löschen ?')) {
+        if (confirm('delete it?')) {
             elem.remove();
             this.unsubscribe(id);
         }
