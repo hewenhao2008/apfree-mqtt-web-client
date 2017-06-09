@@ -346,10 +346,10 @@ limitations under the License.
 		var gwidList = $('#publishTopic').val().replace(/\r\n/g, "\n").split("\n");;
 		var op = $('#apfreeOperation').val();
     if (typeof gwidList.map != "undefined") {
-      sendPublish.publish(gwidList, op, parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
+      sendPublish(gwidList, op, parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
     } else {
       for(var i in gwidList) {
-        sendPublish.publish(gwidList[i], op, parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
+        sendPublish(gwidList[i], op, parseInt($('#publishQoSInput').val(),10), $('#publishRetain').is(':checked'));
       }
     }
 	}
