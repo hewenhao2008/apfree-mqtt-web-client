@@ -284,7 +284,7 @@ var websocketclient = {
                 return largest;
             }
             
-            if (!jmsg.hasOwnProperty('sys_uptime')) {
+            if (jmsg < 10 || !jmsg.hasOwnProperty('sys_uptime')) {
                 html += '           </div>' +
                     '           <div class="large-12 columns message break-words">' + Encoder.htmlEncode(msg) + '</div>' +
                     '       </div>' +
