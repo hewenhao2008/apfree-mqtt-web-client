@@ -1,4 +1,4 @@
-hivemq-mqtt-web-client
+ApFree_WiFiDog-mqtt-web-client
 ======================
 
 ## A websockets based MQTT Client for your browser.
