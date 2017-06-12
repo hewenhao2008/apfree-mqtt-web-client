@@ -343,6 +343,10 @@ limitations under the License.
 	}
 	
 	function pubMsg() {
+    if ($('#publishTopic').val() == "") {
+      alert("gateway id can not be empty");
+      return;
+    }
 		var gwidList = $('#publishTopic').val().trim().replace(/\r\n/g, "\n").split("\n");;
 		var op = $('#apfreeOperation').val();
     if (typeof gwidList.map == "undefined") {
